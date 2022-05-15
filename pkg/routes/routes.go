@@ -3,6 +3,8 @@ package routes
 import (
 	"encoding/json"
     "net/http"
+
+	"example.com/go-demo-server/pkg/db"
 )
 
 type PingResponse struct{
@@ -18,4 +20,9 @@ func PingHandler(w http.ResponseWriter, r *http.Request){
 	}
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(PingResponse{Message: "pong"})
+}
+
+func GetMoviesHandler(w http.ResponseWriter, r *http.Request){
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(db.GetAll())
 }
