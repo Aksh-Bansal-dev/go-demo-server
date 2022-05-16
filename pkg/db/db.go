@@ -1,7 +1,7 @@
 package db
 
 import (
-    "errors"
+	"errors"
 )
 
 type Album struct {
@@ -35,7 +35,7 @@ func GetAll()[]Album{
     return albums;
 }
 
-func Add(id string, data Album){
+func Add(data Album){
     albums = append(albums, data)
 }
 

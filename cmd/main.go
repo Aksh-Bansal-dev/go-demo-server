@@ -1,20 +1,24 @@
 package main
 
 import (
-    "fmt"
-    "log"
-    "net/http"
-    "os"
+	"fmt"
+	"log"
+	"net/http"
+	"os"
 
-    "github.com/gorilla/mux"
+	"github.com/gorilla/mux"
 
-    "example.com/go-demo-server/pkg/routes"
+	"example.com/go-demo-server/pkg/routes"
 )
 
 func main() {
     r := mux.NewRouter().PathPrefix("/api").Subrouter()
 
     r.HandleFunc("/movies",routes.GetMoviesHandler).Methods("GET")
+    r.HandleFunc("/movies/{id}",routes.GetMovieHandler).Methods("GET")
+    r.HandleFunc("/movies",routes.AddMovieHandler).Methods("POST")
+    r.HandleFunc("/movies",routes.UpdateMovieHandler).Methods("PUT")
+    r.HandleFunc("/movies/{id}",routes.DeleteMovieHandler).Methods("DELETE")
 
 	http.Handle("/static/", http.StripPrefix("/static/",routes.FileServer))
     http.HandleFunc("/ping", routes.PingHandler)
